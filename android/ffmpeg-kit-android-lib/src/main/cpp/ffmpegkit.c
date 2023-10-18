@@ -93,7 +93,7 @@ static jclass stringClass;
 static jmethodID stringConstructor;
 
 /** Full name of the Config class */
-const char *configClassName = "com/arthenica/ffmpegkit/FFmpegKitConfig";
+const char *configClassName = "com/lgcns/ffmpegkit/FFmpegKitConfig";
 
 /** Full name of String class */
 const char *stringClassName = "java/lang/String";
@@ -113,20 +113,20 @@ int configuredLogLevel = AV_LOG_INFO;
 
 /** Prototypes of native functions defined by Config class. */
 JNINativeMethod configMethods[] = {
-    {"enableNativeRedirection", "()V", (void*) Java_com_arthenica_ffmpegkit_FFmpegKitConfig_enableNativeRedirection},
-    {"disableNativeRedirection", "()V", (void*) Java_com_arthenica_ffmpegkit_FFmpegKitConfig_disableNativeRedirection},
-    {"setNativeLogLevel", "(I)V", (void*) Java_com_arthenica_ffmpegkit_FFmpegKitConfig_setNativeLogLevel},
-    {"getNativeLogLevel", "()I", (void*) Java_com_arthenica_ffmpegkit_FFmpegKitConfig_getNativeLogLevel},
-    {"getNativeFFmpegVersion", "()Ljava/lang/String;", (void*) Java_com_arthenica_ffmpegkit_FFmpegKitConfig_getNativeFFmpegVersion},
-    {"getNativeVersion", "()Ljava/lang/String;", (void*) Java_com_arthenica_ffmpegkit_FFmpegKitConfig_getNativeVersion},
-    {"nativeFFmpegExecute", "(J[Ljava/lang/String;)I", (void*) Java_com_arthenica_ffmpegkit_FFmpegKitConfig_nativeFFmpegExecute},
-    {"nativeFFmpegCancel", "(J)V", (void*) Java_com_arthenica_ffmpegkit_FFmpegKitConfig_nativeFFmpegCancel},
-    {"nativeFFprobeExecute", "(J[Ljava/lang/String;)I", (void*) Java_com_arthenica_ffmpegkit_FFmpegKitConfig_nativeFFprobeExecute},
-    {"registerNewNativeFFmpegPipe", "(Ljava/lang/String;)I", (void*) Java_com_arthenica_ffmpegkit_FFmpegKitConfig_registerNewNativeFFmpegPipe},
-    {"getNativeBuildDate", "()Ljava/lang/String;", (void*) Java_com_arthenica_ffmpegkit_FFmpegKitConfig_getNativeBuildDate},
-    {"setNativeEnvironmentVariable", "(Ljava/lang/String;Ljava/lang/String;)I", (void*) Java_com_arthenica_ffmpegkit_FFmpegKitConfig_setNativeEnvironmentVariable},
-    {"ignoreNativeSignal", "(I)V", (void*) Java_com_arthenica_ffmpegkit_FFmpegKitConfig_ignoreNativeSignal},
-    {"messagesInTransmit", "(J)I", (void*) Java_com_arthenica_ffmpegkit_FFmpegKitConfig_messagesInTransmit}
+    {"enableNativeRedirection", "()V", (void*) Java_com_lgcns_ffmpegkit_FFmpegKitConfig_enableNativeRedirection},
+    {"disableNativeRedirection", "()V", (void*) Java_com_lgcns_ffmpegkit_FFmpegKitConfig_disableNativeRedirection},
+    {"setNativeLogLevel", "(I)V", (void*) Java_com_lgcns_ffmpegkit_FFmpegKitConfig_setNativeLogLevel},
+    {"getNativeLogLevel", "()I", (void*) Java_com_lgcns_ffmpegkit_FFmpegKitConfig_getNativeLogLevel},
+    {"getNativeFFmpegVersion", "()Ljava/lang/String;", (void*) Java_com_lgcns_ffmpegkit_FFmpegKitConfig_getNativeFFmpegVersion},
+    {"getNativeVersion", "()Ljava/lang/String;", (void*) Java_com_lgcns_ffmpegkit_FFmpegKitConfig_getNativeVersion},
+    {"nativeFFmpegExecute", "(J[Ljava/lang/String;)I", (void*) Java_com_lgcns_ffmpegkit_FFmpegKitConfig_nativeFFmpegExecute},
+    {"nativeFFmpegCancel", "(J)V", (void*) Java_com_lgcns_ffmpegkit_FFmpegKitConfig_nativeFFmpegCancel},
+    {"nativeFFprobeExecute", "(J[Ljava/lang/String;)I", (void*) Java_com_lgcns_ffmpegkit_FFmpegKitConfig_nativeFFprobeExecute},
+    {"registerNewNativeFFmpegPipe", "(Ljava/lang/String;)I", (void*) Java_com_lgcns_ffmpegkit_FFmpegKitConfig_registerNewNativeFFmpegPipe},
+    {"getNativeBuildDate", "()Ljava/lang/String;", (void*) Java_com_lgcns_ffmpegkit_FFmpegKitConfig_getNativeBuildDate},
+    {"setNativeEnvironmentVariable", "(Ljava/lang/String;Ljava/lang/String;)I", (void*) Java_com_lgcns_ffmpegkit_FFmpegKitConfig_setNativeEnvironmentVariable},
+    {"ignoreNativeSignal", "(I)V", (void*) Java_com_lgcns_ffmpegkit_FFmpegKitConfig_ignoreNativeSignal},
+    {"messagesInTransmit", "(J)I", (void*) Java_com_lgcns_ffmpegkit_FFmpegKitConfig_messagesInTransmit}
 };
 
 /** Forward declaration for function defined in fftools_ffmpeg.c */
@@ -701,7 +701,7 @@ jint JNI_OnLoad(JavaVM *vm, void *reserved) {
  * @param object reference to the class on which this method is invoked
  * @param level log level
  */
-JNIEXPORT void JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_setNativeLogLevel(JNIEnv *env, jclass object, jint level) {
+JNIEXPORT void JNICALL Java_com_lgcns_ffmpegkit_FFmpegKitConfig_setNativeLogLevel(JNIEnv *env, jclass object, jint level) {
     configuredLogLevel = level;
 }
 
@@ -711,7 +711,7 @@ JNIEXPORT void JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_setNativeLog
  * @param env pointer to native method interface
  * @param object reference to the class on which this method is invoked
  */
-JNIEXPORT jint JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_getNativeLogLevel(JNIEnv *env, jclass object) {
+JNIEXPORT jint JNICALL Java_com_lgcns_ffmpegkit_FFmpegKitConfig_getNativeLogLevel(JNIEnv *env, jclass object) {
     return configuredLogLevel;
 }
 
@@ -721,7 +721,7 @@ JNIEXPORT jint JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_getNativeLog
  * @param env pointer to native method interface
  * @param object reference to the class on which this method is invoked
  */
-JNIEXPORT void JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_enableNativeRedirection(JNIEnv *env, jclass object) {
+JNIEXPORT void JNICALL Java_com_lgcns_ffmpegkit_FFmpegKitConfig_enableNativeRedirection(JNIEnv *env, jclass object) {
     enableNativeRedirection();
 }
 
@@ -731,7 +731,7 @@ JNIEXPORT void JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_enableNative
  * @param env pointer to native method interface
  * @param object reference to the class on which this method is invoked
  */
-JNIEXPORT void JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_disableNativeRedirection(JNIEnv *env, jclass object) {
+JNIEXPORT void JNICALL Java_com_lgcns_ffmpegkit_FFmpegKitConfig_disableNativeRedirection(JNIEnv *env, jclass object) {
 
     mutexLock();
 
@@ -756,7 +756,7 @@ JNIEXPORT void JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_disableNativ
  * @param object reference to the class on which this method is invoked
  * @return FFmpeg version string
  */
-JNIEXPORT jstring JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_getNativeFFmpegVersion(JNIEnv *env, jclass object) {
+JNIEXPORT jstring JNICALL Java_com_lgcns_ffmpegkit_FFmpegKitConfig_getNativeFFmpegVersion(JNIEnv *env, jclass object) {
     return (*env)->NewStringUTF(env, FFMPEG_VERSION);
 }
 
@@ -767,7 +767,7 @@ JNIEXPORT jstring JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_getNative
  * @param object reference to the class on which this method is invoked
  * @return FFmpegKit version string
  */
-JNIEXPORT jstring JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_getNativeVersion(JNIEnv *env, jclass object) {
+JNIEXPORT jstring JNICALL Java_com_lgcns_ffmpegkit_FFmpegKitConfig_getNativeVersion(JNIEnv *env, jclass object) {
     return (*env)->NewStringUTF(env, FFMPEG_KIT_VERSION);
 }
 
@@ -780,7 +780,7 @@ JNIEXPORT jstring JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_getNative
  * @param stringArray reference to the object holding FFmpeg command arguments
  * @return zero on successful execution, non-zero on error
  */
-JNIEXPORT jint JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_nativeFFmpegExecute(JNIEnv *env, jclass object, jlong id, jobjectArray stringArray) {
+JNIEXPORT jint JNICALL Java_com_lgcns_ffmpegkit_FFmpegKitConfig_nativeFFmpegExecute(JNIEnv *env, jclass object, jlong id, jobjectArray stringArray) {
     jstring *tempArray = NULL;
     int argumentCount = 1;
     char **argv = NULL;
@@ -846,7 +846,7 @@ JNIEXPORT jint JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_nativeFFmpeg
  * @param object reference to the class on which this method is invoked
  * @param id session id
  */
-JNIEXPORT void JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_nativeFFmpegCancel(JNIEnv *env, jclass object, jlong id) {
+JNIEXPORT void JNICALL Java_com_lgcns_ffmpegkit_FFmpegKitConfig_nativeFFmpegCancel(JNIEnv *env, jclass object, jlong id) {
     cancel_operation(id);
 }
 
@@ -858,7 +858,7 @@ JNIEXPORT void JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_nativeFFmpeg
  * @param ffmpegPipePath full path of ffmpeg pipe
  * @return zero on successful creation, non-zero on error
  */
-JNIEXPORT int JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_registerNewNativeFFmpegPipe(JNIEnv *env, jclass object, jstring ffmpegPipePath) {
+JNIEXPORT int JNICALL Java_com_lgcns_ffmpegkit_FFmpegKitConfig_registerNewNativeFFmpegPipe(JNIEnv *env, jclass object, jstring ffmpegPipePath) {
     const char *ffmpegPipePathString = (*env)->GetStringUTFChars(env, ffmpegPipePath, 0);
 
     return mkfifo(ffmpegPipePathString, S_IRWXU | S_IRWXG | S_IROTH);
@@ -871,7 +871,7 @@ JNIEXPORT int JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_registerNewNa
  * @param object reference to the class on which this method is invoked
  * @return FFmpegKit library build date
  */
-JNIEXPORT jstring JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_getNativeBuildDate(JNIEnv *env, jclass object) {
+JNIEXPORT jstring JNICALL Java_com_lgcns_ffmpegkit_FFmpegKitConfig_getNativeBuildDate(JNIEnv *env, jclass object) {
     char buildDate[10];
     sprintf(buildDate, "%d", FFMPEG_KIT_BUILD_DATE);
     return (*env)->NewStringUTF(env, buildDate);
@@ -886,7 +886,7 @@ JNIEXPORT jstring JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_getNative
  * @param variableValue environment variable value
  * @return zero on success, non-zero on error
  */
-JNIEXPORT int JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_setNativeEnvironmentVariable(JNIEnv *env, jclass object, jstring variableName, jstring variableValue) {
+JNIEXPORT int JNICALL Java_com_lgcns_ffmpegkit_FFmpegKitConfig_setNativeEnvironmentVariable(JNIEnv *env, jclass object, jstring variableName, jstring variableValue) {
     const char *variableNameString = (*env)->GetStringUTFChars(env, variableName, 0);
     const char *variableValueString = (*env)->GetStringUTFChars(env, variableValue, 0);
 
@@ -904,7 +904,7 @@ JNIEXPORT int JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_setNativeEnvi
  * @param object reference to the class on which this method is invoked
  * @param signum signal number
  */
-JNIEXPORT void JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_ignoreNativeSignal(JNIEnv *env, jclass object, jint signum) {
+JNIEXPORT void JNICALL Java_com_lgcns_ffmpegkit_FFmpegKitConfig_ignoreNativeSignal(JNIEnv *env, jclass object, jint signum) {
     if (signum == SIGQUIT) {
         handleSIGQUIT = 0;
     } else if (signum == SIGINT) {
@@ -926,6 +926,6 @@ JNIEXPORT void JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_ignoreNative
  * @param object reference to the class on which this method is invoked
  * @param id session id
  */
-JNIEXPORT int JNICALL Java_com_arthenica_ffmpegkit_FFmpegKitConfig_messagesInTransmit(JNIEnv *env, jclass object, jlong id) {
+JNIEXPORT int JNICALL Java_com_lgcns_ffmpegkit_FFmpegKitConfig_messagesInTransmit(JNIEnv *env, jclass object, jlong id) {
     return atomic_load(&sessionInTransitMessageCountMap[id % SESSION_MAP_SIZE]);
 }
