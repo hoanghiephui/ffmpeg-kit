@@ -1,35 +1,18 @@
-/*
- * Copyright (c) 2018-2021 Taner Sener
- *
- * This file is part of FFmpegKit.
- *
- * FFmpegKit is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * FFmpegKit is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with FFmpegKit.  If not, see <http://www.gnu.org/licenses/>.
- */
+
 
 #include "cpu-features.h"
 #include "fftools_ffmpeg.h"
 #include "ffmpegkit_abidetect.h"
 
 /** Full name of the Java class that owns native functions in this file. */
-const char *abiDetectClassName = "com/arthenica/ffmpegkit/AbiDetect";
+const char *abiDetectClassName = "comlgcns/ffmpegkit/AbiDetect";
 
 /** Prototypes of native functions defined by this file. */
 JNINativeMethod abiDetectMethods[] = {
-  {"getNativeAbi", "()Ljava/lang/String;", (void*) Java_com_arthenica_ffmpegkit_AbiDetect_getNativeAbi},
-  {"getNativeCpuAbi", "()Ljava/lang/String;", (void*) Java_com_arthenica_ffmpegkit_AbiDetect_getNativeCpuAbi},
-  {"isNativeLTSBuild", "()Z", (void*) Java_com_arthenica_ffmpegkit_AbiDetect_isNativeLTSBuild},
-  {"getNativeBuildConf", "()Ljava/lang/String;", (void*) Java_com_arthenica_ffmpegkit_AbiDetect_getNativeBuildConf}
+  {"getNativeAbi", "()Ljava/lang/String;", (void*) Java_com_lgcns_ffmpegkit_AbiDetect_getNativeAbi},
+  {"getNativeCpuAbi", "()Ljava/lang/String;", (void*) Java_com_lgcns_ffmpegkit_AbiDetect_getNativeCpuAbi},
+  {"isNativeLTSBuild", "()Z", (void*) Java_com_lgcns_ffmpegkit_AbiDetect_isNativeLTSBuild},
+  {"getNativeBuildConf", "()Ljava/lang/String;", (void*) Java_com_lgcns_ffmpegkit_AbiDetect_getNativeBuildConf}
 };
 
 /**
@@ -67,7 +50,7 @@ jint JNI_OnLoad(JavaVM *vm, void *reserved) {
  * @param object reference to the class on which this method is invoked
  * @return loaded ABI name as UTF string
  */
-JNIEXPORT jstring JNICALL Java_com_arthenica_ffmpegkit_AbiDetect_getNativeAbi(JNIEnv *env, jclass object) {
+JNIEXPORT jstring JNICALL Java_com_lgcns_ffmpegkit_AbiDetect_getNativeAbi(JNIEnv *env, jclass object) {
 
 #ifdef FFMPEG_KIT_ARM_V7A
     return (*env)->NewStringUTF(env, "arm-v7a");
@@ -90,7 +73,7 @@ JNIEXPORT jstring JNICALL Java_com_arthenica_ffmpegkit_AbiDetect_getNativeAbi(JN
  * @param object reference to the class on which this method is invoked
  * @return ABI name of the running cpu as UTF string
  */
-JNIEXPORT jstring JNICALL Java_com_arthenica_ffmpegkit_AbiDetect_getNativeCpuAbi(JNIEnv *env, jclass object) {
+JNIEXPORT jstring JNICALL Java_com_lgcns_ffmpegkit_AbiDetect_getNativeCpuAbi(JNIEnv *env, jclass object) {
     AndroidCpuFamily family = android_getCpuFamily();
 
     if (family == ANDROID_CPU_FAMILY_ARM) {
@@ -124,7 +107,7 @@ JNIEXPORT jstring JNICALL Java_com_arthenica_ffmpegkit_AbiDetect_getNativeCpuAbi
  * @param object reference to the class on which this method is invoked
  * @return yes or no
  */
-JNIEXPORT jboolean JNICALL Java_com_arthenica_ffmpegkit_AbiDetect_isNativeLTSBuild(JNIEnv *env, jclass object) {
+JNIEXPORT jboolean JNICALL Java_com_lgcns_ffmpegkit_AbiDetect_isNativeLTSBuild(JNIEnv *env, jclass object) {
     #if defined(FFMPEG_KIT_LTS)
         return JNI_TRUE;
     #else
@@ -139,6 +122,6 @@ JNIEXPORT jboolean JNICALL Java_com_arthenica_ffmpegkit_AbiDetect_isNativeLTSBui
  * @param object reference to the class on which this method is invoked
  * @return build configuration string
  */
-JNIEXPORT jstring JNICALL Java_com_arthenica_ffmpegkit_AbiDetect_getNativeBuildConf(JNIEnv *env, jclass object) {
+JNIEXPORT jstring JNICALL Java_com_lgcns_ffmpegkit_AbiDetect_getNativeBuildConf(JNIEnv *env, jclass object) {
     return (*env)->NewStringUTF(env, FFMPEG_CONFIGURATION);
 }

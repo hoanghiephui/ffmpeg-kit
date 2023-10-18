@@ -1,37 +1,3 @@
-/*
- * Option handlers shared between the tools.
- * Copyright (c) 2022 Taner Sener
- *
- * This file is part of FFmpeg.
- *
- * FFmpeg is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- *
- * FFmpeg is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with FFmpeg; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
- */
-
-/*
- * This file is the modified version of opt_common.h file living in ffmpeg source code under the fftools folder. We
- * manually update it each time we depend on a new ffmpeg version. Below you can see the list of changes applied
- * by us to develop the ffmpeg-kit library.
- *
- * ffmpeg-kit changes by Taner Sener
- *
- * 09.2022
- * --------------------------------------------------------
- * - CMDUTILS_COMMON_OPTIONS and CMDUTILS_COMMON_OPTIONS_AVDEVICE defines dropped
- * - fftools_ prefix added to fftools headers
- */
-
 #ifndef FFTOOLS_OPT_COMMON_H
 #define FFTOOLS_OPT_COMMON_H
 
