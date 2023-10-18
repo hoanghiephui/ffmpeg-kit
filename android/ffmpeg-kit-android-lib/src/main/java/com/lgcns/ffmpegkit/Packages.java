@@ -1,5 +1,3 @@
-
-
 package com.lgcns.ffmpegkit;
 
 import java.util.ArrayList;

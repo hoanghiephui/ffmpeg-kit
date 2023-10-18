@@ -1,8 +1,5 @@
-
-
 package com.lgcns.ffmpegkit;
 
-import com.arthenica.smartexception.java.Exceptions;
 
 /**
  * <p>Executes an FFprobe session asynchronously.
@@ -25,7 +22,7 @@ public class AsyncFFprobeExecuteTask implements Runnable {
                 // NOTIFY SESSION CALLBACK DEFINED
                 completeCallback.apply(ffprobeSession);
             } catch (final Exception e) {
-                android.util.Log.e(FFmpegKitConfig.TAG, String.format("Exception thrown inside session complete callback.%s", Exceptions.getStackTraceString(e)));
+                android.util.Log.e(FFmpegKitConfig.TAG, String.format("Exception thrown inside session complete callback.%s", e.getMessage()));
             }
         }
 
@@ -35,7 +32,7 @@ public class AsyncFFprobeExecuteTask implements Runnable {
                 // NOTIFY GLOBAL CALLBACK DEFINED
                 globalFFprobeSessionCompleteCallback.apply(ffprobeSession);
             } catch (final Exception e) {
-                android.util.Log.e(FFmpegKitConfig.TAG, String.format("Exception thrown inside global complete callback.%s", Exceptions.getStackTraceString(e)));
+                android.util.Log.e(FFmpegKitConfig.TAG, String.format("Exception thrown inside global complete callback.%s", e.getMessage()));
             }
         }
     }

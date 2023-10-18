@@ -1,5 +1,3 @@
-
-
 #include "cpu-features.h"
 #include "fftools_ffmpeg.h"
 #include "ffmpegkit_abidetect.h"

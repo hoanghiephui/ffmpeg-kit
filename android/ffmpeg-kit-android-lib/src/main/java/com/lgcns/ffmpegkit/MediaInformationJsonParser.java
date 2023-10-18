@@ -1,11 +1,6 @@
-
-
 package com.lgcns.ffmpegkit;
 
 import android.util.Log;
-
-import com.arthenica.smartexception.java.Exceptions;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +27,7 @@ public class MediaInformationJsonParser {
         try {
             return fromWithError(ffprobeJsonOutput);
         } catch (JSONException e) {
-            Log.e(FFmpegKitConfig.TAG, String.format("MediaInformation parsing failed.%s", Exceptions.getStackTraceString(e)));
+            Log.e(FFmpegKitConfig.TAG, String.format("MediaInformation parsing failed.%s", e.getMessage()));
             return null;
         }
     }

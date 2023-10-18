@@ -1,27 +1,7 @@
-/*
- * Copyright (c) 2021 Taner Sener
- *
- * This file is part of FFmpegKit.
- *
- * FFmpegKit is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * FFmpegKit is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser General Public License
- *  along with FFmpegKit.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 package com.lgcns.ffmpegkit;
 
 import android.os.Build;
 
-import com.arthenica.smartexception.java.Exceptions;
 
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -152,7 +132,7 @@ public class NativeLoader {
                     }
                     nativeFFmpegLoaded = true;
                 } catch (final Error e) {
-                    android.util.Log.i(FFmpegKitConfig.TAG, String.format("NEON supported armeabi-v7a ffmpeg library not found. Loading default armeabi-v7a library.%s", Exceptions.getStackTraceString(e)));
+                    android.util.Log.i(FFmpegKitConfig.TAG, String.format("NEON supported armeabi-v7a ffmpeg library not found. Loading default armeabi-v7a library.%s", e.getMessage()));
                     nativeFFmpegTriedAndFailed = true;
                 }
             }
@@ -181,7 +161,7 @@ public class NativeLoader {
                 nativeFFmpegKitLoaded = true;
                 AbiDetect.setArmV7aNeonLoaded();
             } catch (final Error e) {
-                android.util.Log.i(FFmpegKitConfig.TAG, String.format("NEON supported armeabi-v7a ffmpegkit library not found. Loading default armeabi-v7a library.%s", Exceptions.getStackTraceString(e)));
+                android.util.Log.i(FFmpegKitConfig.TAG, String.format("NEON supported armeabi-v7a ffmpegkit library not found. Loading default armeabi-v7a library.%s", e.getMessage()));
             }
         }
 
