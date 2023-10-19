@@ -220,7 +220,7 @@ public abstract class AbstractSession implements Session {
 
         synchronized (logsLock) {
             for (Log log : logs) {
-                concatenatedString.append(log.getMessage());
+                concatenatedString.append(log.message);
             }
         }
 

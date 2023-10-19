@@ -33,13 +33,13 @@ public class FFmpegSessionTest {
         FFmpegSession ffmpegSession = FFmpegSession.create(TEST_ARGUMENTS);
 
         // 1. getCompleteCallback
-        Assert.assertNull(ffmpegSession.getCompleteCallback());
+        Assert.assertNull(ffmpegSession.completeCallback);
 
         // 2. getLogCallback
         Assert.assertNull(ffmpegSession.getLogCallback());
 
         // 3. getStatisticsCallback
-        Assert.assertNull(ffmpegSession.getStatisticsCallback());
+        Assert.assertNull(ffmpegSession.statisticsCallback);
 
         // 4. getSessionId
         Assert.assertTrue(ffmpegSession.getSessionId() > 0);
@@ -103,13 +103,13 @@ public class FFmpegSessionTest {
         FFmpegSession ffmpegSession = FFmpegSession.create(TEST_ARGUMENTS, completeCallback);
 
         // 1. getCompleteCallback
-        Assert.assertEquals(ffmpegSession.getCompleteCallback(), completeCallback);
+        Assert.assertEquals(ffmpegSession.completeCallback, completeCallback);
 
         // 2. getLogCallback
         Assert.assertNull(ffmpegSession.getLogCallback());
 
         // 3. getStatisticsCallback
-        Assert.assertNull(ffmpegSession.getStatisticsCallback());
+        Assert.assertNull(ffmpegSession.statisticsCallback);
 
         // 4. getSessionId
         Assert.assertTrue(ffmpegSession.getSessionId() > 0);
@@ -187,13 +187,13 @@ public class FFmpegSessionTest {
         FFmpegSession ffmpegSession = FFmpegSession.create(TEST_ARGUMENTS, completeCallback, logCallback, statisticsCallback);
 
         // 1. getCompleteCallback
-        Assert.assertEquals(ffmpegSession.getCompleteCallback(), completeCallback);
+        Assert.assertEquals(ffmpegSession.completeCallback, completeCallback);
 
         // 2. getLogCallback
         Assert.assertEquals(ffmpegSession.getLogCallback(), logCallback);
 
         // 3. getStatisticsCallback
-        Assert.assertEquals(ffmpegSession.getStatisticsCallback(), statisticsCallback);
+        Assert.assertEquals(ffmpegSession.statisticsCallback, statisticsCallback);
 
         // 4. getSessionId
         Assert.assertTrue(ffmpegSession.getSessionId() > 0);
@@ -324,7 +324,7 @@ public class FFmpegSessionTest {
         ffmpegSession.complete(new ReturnCode(100));
 
         Assert.assertEquals(SessionState.COMPLETED, ffmpegSession.getState());
-        Assert.assertEquals(100, ffmpegSession.getReturnCode().getValue());
+        Assert.assertEquals(100, ffmpegSession.getReturnCode().value);
         Assert.assertTrue(ffmpegSession.getStartTime().getTime() <= ffmpegSession.getEndTime().getTime());
         Assert.assertTrue(ffmpegSession.getDuration() >= 0);
     }

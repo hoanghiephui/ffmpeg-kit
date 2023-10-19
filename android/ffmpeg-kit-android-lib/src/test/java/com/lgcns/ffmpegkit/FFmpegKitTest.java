@@ -535,14 +535,14 @@ public class FFmpegKitTest {
         assertTag(mediaInformation, "title", "Impact Moderato");
         assertTag(mediaInformation, "artist", "Kevin MacLeod");
 
-        Assert.assertNotNull(mediaInformation.getStreams());
-        Assert.assertEquals(1, mediaInformation.getStreams().size());
-        assertAudioStream(mediaInformation.getStreams().get(0), 0L, "mp3", "MP3 (MPEG audio layer 3)", "44100", "stereo", "fltp", "320000");
+        Assert.assertNotNull(mediaInformation.streams);
+        Assert.assertEquals(1, mediaInformation.streams.size());
+        assertAudioStream(mediaInformation.streams.get(0), 0L, "mp3", "MP3 (MPEG audio layer 3)", "44100", "stereo", "fltp", "320000");
 
-        Assert.assertNotNull(mediaInformation.getChapters());
-        Assert.assertEquals(7, mediaInformation.getChapters().size());
-        assertChapter(mediaInformation.getChapters().get(0), 0L, "1/22050", 0L, "0.000000", 11158238L, "506.042540");
-        assertChapter(mediaInformation.getChapters().get(1), 1L, "1/22050", 11158238L, "506.042540", 21433051L, "972.020454");
+        Assert.assertNotNull(mediaInformation.chapters);
+        Assert.assertEquals(7, mediaInformation.chapters.size());
+        assertChapter(mediaInformation.chapters.get(0), 0L, "1/22050", 0L, "0.000000", 11158238L, "506.042540");
+        assertChapter(mediaInformation.chapters.get(1), 1L, "1/22050", 11158238L, "506.042540", 21433051L, "972.020454");
     }
 
     @Test
@@ -552,9 +552,9 @@ public class FFmpegKitTest {
         Assert.assertNotNull(mediaInformation);
         assertMediaInput(mediaInformation, "image2", "sample.jpg");
         assertMediaDuration(mediaInformation, "0.040000", "0.000000", "331810000");
-        Assert.assertNotNull(mediaInformation.getStreams());
-        Assert.assertEquals(1, mediaInformation.getStreams().size());
-        assertVideoStream(mediaInformation.getStreams().get(0), 0L, "mjpeg", "Motion JPEG", "yuvj444p", 1496L, 1729L, "1:1", "1496:1729", null, "0/0", "25/1", "1/25", "0/1");
+        Assert.assertNotNull(mediaInformation.streams);
+        Assert.assertEquals(1, mediaInformation.streams.size());
+        assertVideoStream(mediaInformation.streams.get(0), 0L, "mjpeg", "Motion JPEG", "yuvj444p", 1496L, 1729L, "1:1", "1496:1729", null, "0/0", "25/1", "1/25", "0/1");
     }
 
     @Test
@@ -564,9 +564,9 @@ public class FFmpegKitTest {
         Assert.assertNotNull(mediaInformation);
         assertMediaInput(mediaInformation, "gif", "sample.gif");
         assertMediaDuration(mediaInformation, "3.960000", "0.000000", "2023672");
-        Assert.assertNotNull(mediaInformation.getStreams());
-        Assert.assertEquals(1, mediaInformation.getStreams().size());
-        assertVideoStream(mediaInformation.getStreams().get(0), 0L, "gif", "CompuServe GIF (Graphics Interchange Format)", "bgra", 400L, 400L, null, null, null, "133/12", "100/9", "1/100", "12/133");
+        Assert.assertNotNull(mediaInformation.streams);
+        Assert.assertEquals(1, mediaInformation.streams.size());
+        assertVideoStream(mediaInformation.streams.get(0), 0L, "gif", "CompuServe GIF (Graphics Interchange Format)", "bgra", 400L, 400L, null, null, null, "133/12", "100/9", "1/100", "12/133");
     }
 
     @Test
@@ -582,12 +582,12 @@ public class FFmpegKitTest {
         assertTag(mediaInformation, "compatible_brands", "isomiso2avc1mp41");
         assertTag(mediaInformation, "encoder", "Lavf58.33.100");
 
-        Assert.assertNotNull(mediaInformation.getStreams());
-        Assert.assertEquals(1, mediaInformation.getStreams().size());
-        assertVideoStream(mediaInformation.getStreams().get(0), 0L, "h264", "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10", "yuv420p", 1280L, 720L, "1:1", "16:9", "9166570", "30/1", "30/1", "1/15360", "1/60");
+        Assert.assertNotNull(mediaInformation.streams);
+        Assert.assertEquals(1, mediaInformation.streams.size());
+        assertVideoStream(mediaInformation.streams.get(0), 0L, "h264", "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10", "yuv420p", 1280L, 720L, "1:1", "16:9", "9166570", "30/1", "30/1", "1/15360", "1/60");
 
-        assertStreamTag(mediaInformation.getStreams().get(0), "language", "und");
-        assertStreamTag(mediaInformation.getStreams().get(0), "handler_name", "VideoHandler");
+        assertStreamTag(mediaInformation.streams.get(0), "language", "und");
+        assertStreamTag(mediaInformation.streams.get(0), "handler_name", "VideoHandler");
     }
 
     @Test
@@ -597,9 +597,9 @@ public class FFmpegKitTest {
         Assert.assertNotNull(mediaInformation);
         assertMediaInput(mediaInformation, "png_pipe", "sample.png");
         assertMediaDuration(mediaInformation, null, null, null);
-        Assert.assertNotNull(mediaInformation.getStreams());
-        Assert.assertEquals(1, mediaInformation.getStreams().size());
-        assertVideoStream(mediaInformation.getStreams().get(0), 0L, "png", "PNG (Portable Network Graphics) image", "pal8", 1198L, 1198L, "1:1", "1:1", null, "0/0", "25/1", "1/25", "0/1");
+        Assert.assertNotNull(mediaInformation.streams);
+        Assert.assertEquals(1, mediaInformation.streams.size());
+        assertVideoStream(mediaInformation.streams.get(0), 0L, "png", "PNG (Portable Network Graphics) image", "pal8", 1198L, 1198L, "1:1", "1:1", null, "0/0", "25/1", "1/25", "0/1");
     }
 
     @Test
@@ -609,13 +609,13 @@ public class FFmpegKitTest {
         Assert.assertNotNull(mediaInformation);
         assertMediaInput(mediaInformation, "ogg", "sample.ogg");
         assertMediaDuration(mediaInformation, "32.996875", "0.000000", "6757958");
-        Assert.assertNotNull(mediaInformation.getStreams());
-        Assert.assertEquals(2, mediaInformation.getStreams().size());
-        assertVideoStream(mediaInformation.getStreams().get(0), 0L, "theora", "Theora", "yuv420p", 1920L, 1080L, null, null, null, "25/1", "25/1", "1/25", "1/25");
-        assertAudioStream(mediaInformation.getStreams().get(1), 1L, "vorbis", "Vorbis", "48000", "stereo", "fltp", "80000");
+        Assert.assertNotNull(mediaInformation.streams);
+        Assert.assertEquals(2, mediaInformation.streams.size());
+        assertVideoStream(mediaInformation.streams.get(0), 0L, "theora", "Theora", "yuv420p", 1920L, 1080L, null, null, null, "25/1", "25/1", "1/25", "1/25");
+        assertAudioStream(mediaInformation.streams.get(1), 1L, "vorbis", "Vorbis", "48000", "stereo", "fltp", "80000");
 
-        assertStreamTag(mediaInformation.getStreams().get(0), "ENCODER", "ffmpeg2theora 0.19");
-        assertStreamTag(mediaInformation.getStreams().get(1), "ENCODER", "ffmpeg2theora 0.19");
+        assertStreamTag(mediaInformation.streams.get(0), "ENCODER", "ffmpeg2theora 0.19");
+        assertStreamTag(mediaInformation.streams.get(1), "ENCODER", "ffmpeg2theora 0.19");
     }
 
     @Test

@@ -33,7 +33,7 @@ public class FFprobeSessionTest {
         FFprobeSession ffprobeSession = FFprobeSession.create(TEST_ARGUMENTS);
 
         // 1. getCompleteCallback
-        Assert.assertNull(ffprobeSession.getCompleteCallback());
+        Assert.assertNull(ffprobeSession.completeCallback);
 
         // 2. getLogCallback
         Assert.assertNull(ffprobeSession.getLogCallback());
@@ -100,7 +100,7 @@ public class FFprobeSessionTest {
         FFprobeSession ffprobeSession = FFprobeSession.create(TEST_ARGUMENTS, completeCallback);
 
         // 1. getCompleteCallback
-        Assert.assertEquals(ffprobeSession.getCompleteCallback(), completeCallback);
+        Assert.assertEquals(ffprobeSession.completeCallback, completeCallback);
 
         // 2. getLogCallback
         Assert.assertNull(ffprobeSession.getLogCallback());
@@ -174,7 +174,7 @@ public class FFprobeSessionTest {
         FFprobeSession ffprobeSession = FFprobeSession.create(TEST_ARGUMENTS, completeCallback, logCallback);
 
         // 1. getCompleteCallback
-        Assert.assertEquals(ffprobeSession.getCompleteCallback(), completeCallback);
+        Assert.assertEquals(ffprobeSession.completeCallback, completeCallback);
 
         // 2. getLogCallback
         Assert.assertEquals(ffprobeSession.getLogCallback(), logCallback);
@@ -308,7 +308,7 @@ public class FFprobeSessionTest {
         ffprobeSession.complete(new ReturnCode(100));
 
         Assert.assertEquals(SessionState.COMPLETED, ffprobeSession.getState());
-        Assert.assertEquals(100, ffprobeSession.getReturnCode().getValue());
+        Assert.assertEquals(100, ffprobeSession.getReturnCode().value);
         Assert.assertTrue(ffprobeSession.getStartTime().getTime() <= ffprobeSession.getEndTime().getTime());
         Assert.assertTrue(ffprobeSession.getDuration() >= 0);
     }

@@ -1,22 +1,3 @@
-/*
- * Copyright (c) 2018-2022 Taner Sener
- *
- * This file is part of FFmpegKit.
- *
- * FFmpegKit is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * FFmpegKit is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser General Public License
- *  along with FFmpegKit.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 package com.lgcns.ffmpegkit;
 
 import android.content.ContentProvider;
@@ -29,7 +10,6 @@ import android.os.ParcelFileDescriptor;
 import android.provider.DocumentsContract;
 import android.util.SparseArray;
 
-import com.arthenica.smartexception.java.Exceptions;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -131,7 +111,6 @@ public class FFmpegKitConfig {
 
     static {
 
-        Exceptions.registerRootPackage("com.lgcns");
 
         android.util.Log.i(FFmpegKitConfig.TAG, "Loading ffmpeg-kit.");
 
@@ -224,7 +203,7 @@ public class FFmpegKitConfig {
         LogRedirectionStrategy activeLogRedirectionStrategy = globalLogRedirectionStrategy;
 
         // AV_LOG_STDERR logs are always redirected
-        if ((activeLogLevel == Level.AV_LOG_QUIET && levelValue != Level.AV_LOG_STDERR.getValue()) || levelValue > activeLogLevel.getValue()) {
+        if ((activeLogLevel == Level.AV_LOG_QUIET && levelValue != Level.AV_LOG_STDERR.value) || levelValue > activeLogLevel.value) {
             // LOG NEITHER PRINTED NOR FORWARDED
             return;
         }
@@ -342,10 +321,10 @@ public class FFmpegKitConfig {
             FFmpegSession ffmpegSession = (FFmpegSession) session;
             ffmpegSession.addStatistics(statistics);
 
-            if (ffmpegSession.getStatisticsCallback() != null) {
+            if (ffmpegSession.statisticsCallback != null) {
                 try {
                     // NOTIFY SESSION CALLBACK IF DEFINED
-                    ffmpegSession.getStatisticsCallback().apply(statistics);
+                    ffmpegSession.statisticsCallback.apply(statistics);
                 } catch (final Exception e) {
                     android.util.Log.e(FFmpegKitConfig.TAG, String.format("Exception thrown inside session statistics callback.%s", e.getMessage()));
                 }
@@ -543,11 +522,8 @@ public class FFmpegKitConfig {
      * @return list of camera ids supported or an empty list if no supported cameras are found
      */
     public static List<String> getSupportedCameraIds(final Context context) {
-        final List<String> detectedCameraIdList = new ArrayList<>();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            detectedCameraIdList.addAll(CameraSupport.extractSupportedCameraIds(context));
-        }
+        final List<String> detectedCameraIdList = new ArrayList<>(CameraSupport.extractSupportedCameraIds(context));
 
         return detectedCameraIdList;
     }
@@ -643,7 +619,7 @@ public class FFmpegKitConfig {
      * @param signal signal to be ignored
      */
     public static void ignoreSignal(final Signal signal) {
-        ignoreNativeSignal(signal.getValue());
+        ignoreNativeSignal(signal.value);
     }
 
     /**
@@ -698,12 +674,12 @@ public class FFmpegKitConfig {
                 final StringBuilder ffprobeJsonOutput = new StringBuilder();
                 for (int i = 0, allLogsSize = allLogs.size(); i < allLogsSize; i++) {
                     Log log = allLogs.get(i);
-                    if (log.getLevel() == Level.AV_LOG_STDERR) {
-                        ffprobeJsonOutput.append(log.getMessage());
+                    if (log.level == Level.AV_LOG_STDERR) {
+                        ffprobeJsonOutput.append(log.message);
                     }
                 }
                 MediaInformation mediaInformation = MediaInformationJsonParser.fromWithError(ffprobeJsonOutput.toString());
-                mediaInformationSession.setMediaInformation(mediaInformation);
+                mediaInformationSession.mediaInformation = mediaInformation;
             }
         } catch (final Exception e) {
             mediaInformationSession.fail(e);
@@ -936,7 +912,7 @@ public class FFmpegKitConfig {
     public static void setLogLevel(final Level level) {
         if (level != null) {
             activeLogLevel = level;
-            setNativeLogLevel(level.getValue());
+            setNativeLogLevel(level.value);
         }
     }
 
@@ -966,18 +942,17 @@ public class FFmpegKitConfig {
      * @return input/output url that can be passed to FFmpegKit or FFprobeKit
      */
     public static String getSafParameter(final Context context, final Uri uri, final String openMode) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            android.util.Log.i(TAG, String.format("getSafParameter is not supported on API Level %d", Build.VERSION.SDK_INT));
-            return "";
-        }
 
         String displayName = "unknown";
         try (Cursor cursor = context.getContentResolver().query(uri, null, null, null, null)) {
             if (cursor != null && cursor.moveToFirst()) {
-                displayName = cursor.getString(cursor.getColumnIndex(DocumentsContract.Document.COLUMN_DISPLAY_NAME));
+                int displayNameColumnIndex = cursor.getColumnIndex(DocumentsContract.Document.COLUMN_DISPLAY_NAME);
+                if (displayNameColumnIndex >= 0) {
+                    displayName = cursor.getString(displayNameColumnIndex);
+                }
             }
         } catch (final Throwable t) {
-            android.util.Log.e(TAG, String.format("Failed to get %s column for %s.%s", DocumentsContract.Document.COLUMN_DISPLAY_NAME, uri.toString(), Exceptions.getStackTraceString(t)));
+            android.util.Log.e(TAG, String.format("Failed to get %s column for %s.%s", DocumentsContract.Document.COLUMN_DISPLAY_NAME, uri.toString(), t.getMessage()));
             throw t;
         }
 
@@ -1034,7 +1009,7 @@ public class FFmpegKitConfig {
                 android.util.Log.e(TAG, String.format("SAF id %d not found.", safId));
             }
         } catch (final Throwable t) {
-            android.util.Log.e(TAG, String.format("Failed to open SAF id: %d.%s", safId, Exceptions.getStackTraceString(t)));
+            android.util.Log.e(TAG, String.format("Failed to open SAF id: %d.%s", safId, t.getMessage()));
         }
 
         return 0;
@@ -1063,7 +1038,7 @@ public class FFmpegKitConfig {
                 android.util.Log.e(TAG, String.format("SAF fd %d not found.", fileDescriptor));
             }
         } catch (final Throwable t) {
-            android.util.Log.e(TAG, String.format("Failed to close SAF fd: %d.%s", fileDescriptor, Exceptions.getStackTraceString(t)));
+            android.util.Log.e(TAG, String.format("Failed to close SAF fd: %d.%s", fileDescriptor, t.getMessage()));
         }
 
         return 0;
