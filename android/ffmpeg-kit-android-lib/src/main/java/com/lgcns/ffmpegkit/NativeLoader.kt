@@ -60,7 +60,7 @@ object NativeLoader {
         return if (isTestModeDisabled) {
             nativeAbi
         } else {
-            Abi.ABI_X86_64.getName()
+            Abi.ABI_X86_64.name
         }
     }
 
@@ -69,7 +69,7 @@ object NativeLoader {
         return if (isTestModeDisabled) {
             abi
         } else {
-            Abi.ABI_X86_64.getName()
+            Abi.ABI_X86_64.name
         }
     }
 

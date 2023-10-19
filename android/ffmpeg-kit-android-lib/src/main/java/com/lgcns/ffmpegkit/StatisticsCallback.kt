@@ -11,5 +11,5 @@ fun interface StatisticsCallback {
      *
      * @param statistics statistics entry
      */
-    fun apply(statistics: Statistics?)
+    fun apply(statistics: Statistics)
 }
